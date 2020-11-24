@@ -1,0 +1,192 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+a{
+    font-size: 18px;
+
+}
+  
+
+/* ----------- NAVBAR ---------------*/
+
+
+nav{
+    background-color:rgb(97, 10, 10);
+    display: grid;
+    grid-template-rows: minmax(min-content,60px) min-content;
+
+}
+nav .content{
+    display: grid;
+    place-items:center;
+    grid-auto-rows: 60px;
+    grid-auto-flow: column;
+    align-content: space-evenly;
+    
+
+}
+
+.links a , h2 , i {
+    color: white;
+}
+.content i{
+    display:none;
+
+}
+i:hover{
+    filter: opacity(50%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+
+}
+.links a:hover{
+    color: rgb(170, 15, 15);
+    transition: 0.6s;
+
+}
+.links{
+    display: grid;
+    grid-gap: 15px;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(min-content,60px);
+    place-items: center;
+}
+
+.dropdown{
+    display: none;
+    position: relative;
+    background-color: rgb(97, 10, 10);
+    text-align: initial;
+}
+.dropdown a{
+    color: white;
+    padding: 20px;
+}
+.dropdown a:hover{
+    background-color: rgb(170, 15, 15);
+}
+
+
+/* ----------------- IMAGE-STORY -------------- */
+
+
+.sub-main{
+    display:grid;
+    place-items: center;
+    grid-gap: 15px;
+}
+.sub-main3{
+    display: grid;
+    place-items: center;
+    grid-gap: 15px;
+}
+.explain{
+    display: grid;
+    place-items: center;
+    margin:15px;
+}
+p{
+    font-size: 20px;
+    text-align: center;
+}
+.story{
+    border:1px solid rgb(97, 10, 10);
+    display: grid;
+    place-items: center;
+    grid-gap: 15px;
+}
+.actions{
+    display:grid;
+    place-items: center;
+    
+}
+.actions div{
+    margin:10px;
+}
+.actions div a{
+    color: white;
+    padding:10px;
+    background-color: rgb(97, 10, 10);;
+}
+.actions button{
+    border:none;
+    color:white;
+    font-size: 18px;
+    background-color: rgb(97, 10, 10);
+    width: 122px;
+    height: 43px;
+}
+.actions button:hover , .actions a:hover{
+    background-color:  rgb(170, 15, 15);
+}
+.actions button:focus{
+    outline:none;
+}
+.image img{
+    width:400px;
+    height: auto;
+}
+
+
+/* ----------------- CAST -------------- */
+
+.sub-main2{
+    display:grid;
+    grid-auto-rows: 275px;
+}
+
+.cast{
+    margin:15px;
+    background-color:rgb(97, 10, 10);
+    display:grid;
+    place-items: center;
+    overflow:auto;
+    margin-bottom: 15px;
+}
+.cast-container{
+    margin:15px;
+    display:grid;
+    grid-template-columns: repeat(4,160px);
+    grid-auto-rows: 230px;
+    grid-gap: 15px;
+}
+.cast-container div{
+    display: grid;
+    background-color: white;
+    grid-template-rows:88% 12%;
+}
+.cast-container div a img{
+    width: 100%;
+    height: 100%;
+}
+/* ----------------- MOBILE VIEW -------------- */
+
+
+@media only screen and (max-width:760px) and (min-width:0px){
+    body{
+        font-size: 15;
+    }
+    .content i{
+        display: initial;
+    }
+    .links{
+        display: none;
+    }
+    .image img{
+        width:350px;
+        height: 400px;
+    }
+    .cast-container{
+        grid-template-columns: repeat(2,140px);
+        grid-auto-rows: 200px;
+    
+    }
+    
+
+
+}

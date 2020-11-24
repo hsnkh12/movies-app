@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css\section.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <title>Section</title>
+</head>
+<body>
+    <div class="main-container">
+        <nav>
+            <div class="content">
+                <h2>LOGO</h2>
+                <div class="links">
+                    <a href="{% url 'home' %}">Home</a>
+                    {% if Li is True %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                    <a href="{% url 'watchlist' %}">Watchlist</a>
+                </div>
+                <i class="material-icons" onclick=menu()>menu</i>
+            </div>
+            <div class="dropdown">
+                <a href="{% url 'home' %}">Home</a>
+                    {% if Li is True %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                    <a href="{% url 'watchlist' %}">Watchlist</a>
+            </div>
+        </nav>
+        <div class="movies">
+            <div class="sub-movies">
+                {% for x in cards %}
+                <div class="card">
+                        <div><img src="{{x.img.url}}"></div>
+                        <div><h3>{{x.shortname}}</h3></div>
+                        <div><h3>{{x.rate}}</h3></div>
+                        <div class="b">
+                            {% if x.name in wl %}
+                            <div id="added">
+                                <div>Added</div>
+                            </div>
+                            {% else %}
+                            <div><button type="submit" class="update-card" data-card="{{x.name}}" data-action="add">
+                            Add watchlist</button></div>
+                            {% endif %}    
+                            <div><a href="{% url 'read-more' x.name %}">Read more</a></div>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+    
+</body>
+
+<script type="text/javascript">
+    var dropdown = document.querySelector("nav .dropdown");
+    var button = document.querySelector("nav .menu");
+
+    function menu()
+    {
+        if (dropdown.style.display === "grid") 
+            {
+                dropdown.style.display = "none";
+            } 
+        else 
+            {
+                dropdown.style.display = "grid";
+            }
+    }
+</script>
+<script>
+    var user = "{{request.user}}"
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    var btn = document.getElementsByClassName('update-card')
+    for(var i=0 ; i< btn.length ; i++){
+        btn[i].addEventListener('click',function(){
+            var card_name = this.dataset.card
+            var action = this.dataset.action
+            console.log("cardname : ",card_name," action : ",action)
+            console.log("user : ",user)
+            AddToWatchlist(card_name,action)
+        })
+
+    }
+    function AddToWatchlist(card_name,action){
+        console.log("sending data to user's watchlist")
+        var url = /*"/"+card_name+*/
+        '/add/'
+
+		fetch(url, {
+			method:'POST',
+			headers:{
+				'Content-Type':'application/json',
+				'X-CSRFToken':csrftoken,
+			}, 
+			body:JSON.stringify({'card_name':card_name, 'action':action})
+        })
+        
+		.then((response) => {
+		   return response.json();
+		})
+		.then((data) => {
+            console.log("data :",data)
+            location.reload()
+		});
+
+    }
+</script>
+
+
+</html>

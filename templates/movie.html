@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css\movie.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <title>Read more</title>
+</head>
+<body>
+    <div class="main-container">
+        <nav>
+            <div class="content">
+                <h2>LOGO</h2>
+                <div class="links">
+                    <a href="{% url 'home' %}">Home</a>
+                    {% if Li is True %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                    <a href="{% url 'watchlist' %}">Watchlist</a>
+                </div>
+                <i class="material-icons" onclick=menu()>menu</i>
+            </div>
+            <div class="dropdown">
+                <a href="{% url 'home' %}">Home</a>
+                    {% if Li is True %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                    <a href="{% url 'watchlist' %}">Watchlist</a>
+            </div>
+        </nav>
+        <div class="sub-main">
+            <div class="sub-main3"></div>
+                    <div class="image">
+                    <img src="{{pointed.img.url}}">
+                    </div>
+                    <div class="explain">
+                        <div class="story">
+                            <div><h1>{{pointed.name}}</h1></div>
+                            <div><p>{{pointed.story}}</p></div>
+                            <div class="actions">
+                                <div>
+                                    <a href="{{pointed.trailer}}">Watch trailer</a>
+                                </div>
+                                {% if pointed.name in wl %}
+                                <div><h3>Added</h3></div>
+                                {% else %}
+                                <div>
+                                    <form action="{% url 'add2' pointed.name %}">
+                                        <button type="submit">Add watchlist</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="sub-main2">
+            <div class="cast">
+                <div class="cast-container">
+                    {% for x in cast%}
+                        <div>
+                            <a href="{{x.wikilink}}"><img src="{{x.img.url}}"></a>
+                            <a href="{{x.wikilink}}">{{x.name}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            
+
+            </div>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+    
+</body>
+<script>
+    var dropdown = document.querySelector("nav .dropdown");
+    var button = document.querySelector("nav .menu");
+
+    function menu()
+    {
+        if (dropdown.style.display === "grid") 
+            {
+                dropdown.style.display = "none";
+            } 
+        else 
+            {
+                dropdown.style.display = "grid";
+            }
+    }
+</script>
+</html>

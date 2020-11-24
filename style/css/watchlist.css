@@ -1,0 +1,130 @@
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+a{
+    font-size: 18px;
+}
+
+.main-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px auto;
+    grid-gap: 20px;
+}
+
+
+/* ----------- NAVBAR ---------------*/
+
+
+nav{
+    background-color:rgb(97, 10, 10);
+    display: grid;
+    grid-template-rows: minmax(min-content,60px) min-content;
+
+}
+nav .content{
+    display: grid;
+    place-items:center;
+    grid-auto-rows: 60px;
+    grid-auto-flow: column;
+    align-content: space-evenly;
+    
+
+}
+
+.links a , h2 , i {
+    color: white;
+}
+.links a{
+    font-size: 18px;
+}
+.content i{
+    display:none;
+
+}
+i:hover{
+    filter: opacity(50%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+
+}
+.links a:hover{
+    color: rgb(170, 15, 15);
+    transition: 0.6s;
+
+}
+.links{
+    display: grid;
+    grid-gap: 15px;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(min-content,60px);
+    place-items: center;
+}
+
+.dropdown{
+    display: none;
+    position: relative;
+    background-color: rgb(97, 10, 10);
+    text-align: initial;
+}
+.dropdown a{
+    color: white;
+    padding: 20px;
+}
+.dropdown a:hover{
+    background-color: rgb(170, 15, 15);
+}
+
+/*-------------------------------------------*/
+
+.sub-main{
+
+    display: grid;
+    place-items: center;
+}
+.table-container{
+    display: grid;
+    grid-gap: 15px;
+    
+}
+.grid-cont{
+    display:grid;
+    grid-template-columns: 170px 100px 100px;
+    grid-gap: 15px;
+    border:1px solid rgb(97, 10, 10);
+}
+.grid-cont div{
+    font-size: 16px;
+    border:none;
+    text-align: center;
+    padding:5px;
+}
+.grid-cont div button{
+    color: white;
+    background-color:rgb(97, 10, 10); 
+    border:none;
+    width: 100%;
+    height: 100%;
+}
+.grid-cont div a{
+    display: block;
+}
+
+
+/* ----------------- MOBILE VIEW -------------- */
+
+@media only screen and (max-width:760px) and (min-width:0px){
+
+    .content i{
+        display: initial;
+    }
+    .links{
+        display: none;
+    }
+}            
